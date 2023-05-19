@@ -22,7 +22,7 @@ public class KafkaListener {
 
         // Create the consumer using props
         final Consumer<String, String> consumer = new KafkaConsumer<>(props);
-
+        consumer.
         // Subscribe to the topic
         consumer.subscribe(Collections.singletonList(TOPIC));
 
