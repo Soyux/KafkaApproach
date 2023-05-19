@@ -1,4 +1,4 @@
-package main.java.com.laguna;
+package com.laguna;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,10 +9,10 @@ import java.net.URL;
 
 public class ChatGPTHandler {
 
-    public void connect(string apiCompletionsUrl,string openaiApiKey,string prompt) {
+    public void connect(String apiCompletionsUrl,String openaiApiKey,String prompt) {
         
-         String url = apiCompletionsUrl;//"https://api.openai.com/v1/chat/completions";
-        String apiKey = openaiApiKey
+        String url = apiCompletionsUrl;//"https://api.openai.com/v1/chat/completions";
+        String apiKey = openaiApiKey;
 
         try {
           
@@ -35,7 +35,7 @@ public class ChatGPTHandler {
             outputStream.flush();
             outputStream.close();
 
-            // Get the response code
+            // Get the response code from the endpoiint of ChatGPT
             int responseCode = connection.getResponseCode();
 
             // Read the response

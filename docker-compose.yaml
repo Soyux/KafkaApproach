@@ -5,9 +5,11 @@ services:
      environment:
       - MYSQL_ROOT_PASSWORD:"${DB_ROOT_PASSWORD}"
      env_file: .env
-     command: --default-authentication-plugin=mysql_native_password
+     #command: --default-authentication-plugin=mysql_native_password
      ports: 
       - "3306:3306"
+
+     
   
   kafka:
     build: ./Infrastructure/Kafka
