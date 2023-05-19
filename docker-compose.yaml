@@ -1,7 +1,7 @@
 services:
   mysql:
      build: ./Infrastructure/MySQL
-     image: soyux/mysql
+     image: laguna/mysql
      environment:
       - MYSQL_ROOT_PASSWORD:"${DB_ROOT_PASSWORD}"
      env_file: .env
@@ -11,7 +11,7 @@ services:
   
   kafka:
     build: ./Infrastructure/Kafka
-    image: soyux/kafka
+    image: laguna/kafka
     command: ${KAFKA_INSTALL_DIR}/bin/zookeeper-server-start.sh ${KAFKA_INSTALL_DIR}/config/zookeeper.properties && ${KAFKA_INSTALL_DIR}/bin/kafka-server-start.sh ${KAFKA_INSTALL_DIR}/config/server.properties"] 
     depends_on:
       - mysql
@@ -22,7 +22,7 @@ services:
             
   backend-java:
     build:  ./App
-    image: soyux/javacode
+    image: laguna/javacode
 
 
     

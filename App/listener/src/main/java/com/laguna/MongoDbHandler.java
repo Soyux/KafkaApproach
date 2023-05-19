@@ -30,7 +30,7 @@ public class MongoDbHandler {
     public void InsertNewDocument(String jsonDocument){
         
         Document newDocument = new Document(jsonDocument);
-        Mongo
+        
                
 
     }//end of InsertNewDocument
