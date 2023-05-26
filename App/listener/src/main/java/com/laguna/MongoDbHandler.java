@@ -4,7 +4,6 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.result.InsertOneResult;
 import org.bson.types.ObjectId;
 
 import org.bson.Document;
@@ -29,9 +28,7 @@ public class MongoDbHandler {
     
     public void InsertNewDocument(String jsonDocument){
         
-        Document newDocument = new Document(jsonDocument);
-        
-               
+        //Document newDocument = new Document(jsonDocument);
 
     }//end of InsertNewDocument
 }//end of MongoDbHandler

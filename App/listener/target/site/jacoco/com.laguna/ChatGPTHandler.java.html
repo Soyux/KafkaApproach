@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChatGPTHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">listener</a> &gt; <a href="index.source.html" class="el_package">com.laguna</a> &gt; <span class="el_source">ChatGPTHandler.java</span></div><h1>ChatGPTHandler.java</h1><pre class="source lang-java linenums">package com.laguna;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+<span class="nc" id="L10">public class ChatGPTHandler {</span>
+
+    public void connect(String apiCompletionsUrl,String openaiApiKey,String prompt) {
+        
+<span class="nc" id="L14">        String url = apiCompletionsUrl;//&quot;https://api.openai.com/v1/chat/completions&quot;;</span>
+<span class="nc" id="L15">        String apiKey = openaiApiKey;</span>
+
+        try {
+          
+<span class="nc" id="L19">            URL apiUrl = new URL(url);</span>
+<span class="nc" id="L20">            HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();</span>
+<span class="nc" id="L21">            connection.setRequestMethod(&quot;POST&quot;);</span>
+<span class="nc" id="L22">            connection.setRequestProperty(&quot;Content-Type&quot;, &quot;application/json&quot;);</span>
+<span class="nc" id="L23">            connection.setRequestProperty(&quot;Authorization&quot;, &quot;Bearer &quot; + apiKey);</span>
+<span class="nc" id="L24">            connection.setDoOutput(true);</span>
+<span class="nc" id="L25">            connection.setDoInput(false);</span>
+<span class="nc" id="L26">            String requestBody = &quot;{\n&quot; +</span>
+                    &quot;  \&quot;model\&quot;: \&quot;gpt-3.5-turbo\&quot;,\n&quot; +
+                    &quot;  \&quot;messages\&quot;: [{\&quot;role\&quot;: \&quot;user\&quot;, \&quot;content\&quot;: \&quot;&quot;+prompt+&quot;\&quot;}],\n&quot; +
+                    &quot;  \&quot;temperature\&quot;: 0.7\n&quot; +
+                    &quot;}&quot;;
+
+            // Write the request body to the connection
+<span class="nc" id="L33">            OutputStream outputStream = connection.getOutputStream();</span>
+<span class="nc" id="L34">            outputStream.write(requestBody.getBytes());</span>
+<span class="nc" id="L35">            outputStream.flush();</span>
+<span class="nc" id="L36">            outputStream.close();</span>
+
+            // Get the response code from the endpoiint of ChatGPT
+<span class="nc" id="L39">            int responseCode = connection.getResponseCode();</span>
+
+            // Read the response
+<span class="nc" id="L42">            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));</span>
+            String inputLine;
+<span class="nc" id="L44">            StringBuilder response = new StringBuilder();</span>
+
+<span class="nc bnc" id="L46" title="All 2 branches missed.">            while ((inputLine = in.readLine()) != null) {</span>
+<span class="nc" id="L47">                response.append(inputLine);</span>
+            }
+<span class="nc" id="L49">            in.close();</span>
+
+            //The outpout will the chatgpt response from what we want
+<span class="nc" id="L52">            System.out.println(&quot;Response Code: &quot; + responseCode);</span>
+<span class="nc" id="L53">            System.out.println(&quot;Response: &quot; + response.toString());</span>
+
+<span class="nc" id="L55">            connection.disconnect();</span>
+<span class="nc" id="L56">        } catch (IOException e) {</span>
+<span class="nc" id="L57">            e.printStackTrace();</span>
+<span class="nc" id="L58">        }</span>
+<span class="nc" id="L59">    }//end of connect</span>
+}//end of class
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
